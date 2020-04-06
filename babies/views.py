@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import BabyForm
-
+from babies.models import Baby
 # Create your views here.
 def baby(request):
 
@@ -9,9 +9,10 @@ def baby(request):
         print(form.data)
         if form.is_valid():
             name = form.cleaned_data['name']
-            # date_of_birth = form.cleaned_data['date_of_birth'].required = False
+            date_of_birth = form.cleaned_data['date_of_birth']
             print(name)
-            Baby.create(name = name)
+            baby = Baby.objects.create(name = name, date_of_birth = date_of_birth )
+            # render(baby/id)
         else:
             print(form.errors)
 

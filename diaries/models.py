@@ -1,14 +1,12 @@
 import datetime
 
 from django.db import models
-from django.utils import timezone
-from babies.models import Baby
 
 # Create your models here.
 
 class Diary(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
-    baby = models.OneToOneField(Baby, on_delete=models.CASCADE, related_name='diary')
+    baby = models.OneToOneField('babies.Baby', on_delete=models.CASCADE, related_name='diary')
     def __str__(self):
         return f'Diary for {self.baby.name}, {self.start_date}'
 

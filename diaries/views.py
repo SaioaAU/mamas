@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.utils import timezone
 
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import Diary, Entry
+from django.models import Diary, Entry
 
 def index(request):
     entries_list = Entry.objects.order_by('pee')[:5]

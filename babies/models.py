@@ -1,8 +1,11 @@
 from django.db import models
+from django.utils import timezone
+
+from diaries.models import Diary
 
 # Create your models here.
 class Baby(models.Model):
-    date_of_birth = models.DateTimeField()
+    date_of_birth = models.DateField()
     # time_of_birth = models.TimeField()
     name = models.CharField(max_length=30)
 
