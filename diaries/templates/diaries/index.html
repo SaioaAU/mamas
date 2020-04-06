@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My diary-test page</title>
+  </head>
+  <body>
+    <p>This is my diary.</p>
+    {% if entries_list %}
+        <ul>
+        {% for question in entries_list %}
+            <li><a href="/diaries/{{ entry.id }}/">{{ entry.description_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No entries are available.</p>
+    {% endif %}
+  </body>
+</html>

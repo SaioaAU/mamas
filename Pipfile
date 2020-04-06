@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 psycopg2 = ">=2.8.4"
+django-extensions = "*"
+django-datetimepicker = "*"
 
 [requires]
 python_version = "3.8"
