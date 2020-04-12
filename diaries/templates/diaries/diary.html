@@ -8,12 +8,13 @@
     <p>This is my diary.</p>
     {% if entries_list %}
         <ul>
-        {% for question in entries_list %}
+        {% for entry in entries_list %}
             <li><a href="/diaries/{{ entry.id }}/">{{ entry.description_text }}</a></li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No entries are available.</p>
     {% endif %}
+    <a href="/diaries/{{ diary.id }}/create"> Create a new entry.</a>
   </body>
 </html>
