@@ -14,10 +14,15 @@
 
 <body>
   <script src="js/scripts.js"></script>
-  <form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Submit</button>
-  </form>
+  <h1>Your babies:</h1>
+  {% if babies %}
+    <ul>
+    {% for baby in babies %}
+        <li><a href="/baby/{{ baby.id }}">{{ baby.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No babies logged in yet.</p>
+{% endif %}
 </body>
 </html>

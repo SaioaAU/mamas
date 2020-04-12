@@ -14,10 +14,7 @@
 
 <body>
   <script src="js/scripts.js"></script>
-  <form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Submit</button>
-  </form>
+    <h1>{{baby.name}}</h1>
+    <h3>{{baby.date_of_birth}}</h3>
 </body>
 </html>

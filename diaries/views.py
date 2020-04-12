@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.template import loader
 
-from django.models import Diary, Entry
+from diaries.models import Diary, Entry
 
 def index(request):
     entries_list = Entry.objects.order_by('pee')[:5]
