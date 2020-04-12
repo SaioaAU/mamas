@@ -13,12 +13,10 @@ def create_baby(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             date_of_birth = form.cleaned_data['date_of_birth']
-            print(name)
-            baby = Baby.objects.create(name = name, date_of_birth = date_of_birth )
-            # render(baby/id)
+            created_by = request.user
+            baby = Baby.objects.create(created_by = created_by, name = name, date_of_birth = date_of_birth )
         else:
             print(form.errors)
-
     form = BabyForm()
     return render(request, 'form.html', {'form': form})
 

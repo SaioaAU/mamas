@@ -18,3 +18,11 @@ def index(request):
 def create(request):
     d = Diary.objects.create(text = request.text, start_date = timezone.now(), baby = request.baby.id)
     return HttpResponse("ok")
+
+def diary(request, diary_id):
+    diary = Diary.objects.get(id = diary_id)
+    template = loader.get_template('diaries/index.html')
+    context = {
+        'diary': diary,
+    }
+    return HttpResponse(template.render(context, request))
