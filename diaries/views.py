@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
+from .forms import Entryform
 
 # Create your views here.
 from django.http import HttpResponse
@@ -20,19 +21,16 @@ def diary(request, diary_id):
     }
     return HttpResponse(template.render(context, request))
 
-def create_entry(request):
+def create_entry(request, diary_id):
     if request.method == 'POST':
         form = EntryForm(request.POST)
-                    import pdb; pdb.set_trace()
-
         print(form.data)
         if form.is_valid():
-            diary_id = request.diary_id
             description_text = form.cleaned_data['description_text']
             pee = form.cleaned_data['pee']
             poo = form.cleaned_data['poo']
             created_by = request.user
-            entry = Eaby.objects.create(created_by = created_by, pee = pee, poo = poo )
+            entry = Entry.objects.create(diary_id = diary_id, created_by = created_by, pee = pee, poo = poo )
         else:
             print(form.errors)
     form = EntryForm()
