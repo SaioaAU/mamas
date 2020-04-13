@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .forms import Entryform
-
-# Create your views here.
+from diaries.forms import EntryForm
 from django.http import HttpResponse
 from django.template import loader
-from .models import Diary
+from diaries.models import Diary, Entry
 
 def create(request):
     d = Diary.objects.create(text = request.text, start_date = timezone.now(), baby = request.baby.id)
@@ -24,7 +22,7 @@ def diary(request, diary_id):
 def create_entry(request, diary_id):
     if request.method == 'POST':
         form = EntryForm(request.POST)
-        print(form.data)
+        print("hello world", form.data)
         if form.is_valid():
             description_text = form.cleaned_data['description_text']
             pee = form.cleaned_data['pee']

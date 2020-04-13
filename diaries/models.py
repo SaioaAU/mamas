@@ -1,5 +1,5 @@
 import datetime
-
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -15,5 +15,6 @@ class Entry(models.Model):
     description_text = models.CharField(max_length=200)
     poo = models.IntegerField(default=0)
     pee = models.IntegerField(default=0)
+    created_by = models.ForeignKey(User, related_name='entries', on_delete=models.CASCADE)
     def __str__(self):
         return self.description_text

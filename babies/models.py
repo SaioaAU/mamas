@@ -9,7 +9,7 @@ class Baby(models.Model):
     date_of_birth = models.DateField()
     # time_of_birth = models.TimeField()
     name = models.CharField(max_length=30)
-    created_by = models.ForeignKey(User, related_name='Baby_created_by', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, related_name='babies', on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 

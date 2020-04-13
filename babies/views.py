@@ -6,7 +6,6 @@ from django.template import loader
 
 # Create your views here.
 def create_baby(request):
-
     if request.method == 'POST':
         form = BabyForm(request.POST)
         print(form.data)
@@ -14,6 +13,7 @@ def create_baby(request):
             name = form.cleaned_data['name']
             date_of_birth = form.cleaned_data['date_of_birth']
             created_by = request.user
+            print(created_by, "hello world")
             baby = Baby.objects.create(created_by = created_by, name = name, date_of_birth = date_of_birth )
         else:
             print(form.errors)
