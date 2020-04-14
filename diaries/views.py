@@ -35,16 +35,12 @@ def entry_create(request, diary_id):
     form = EntryForm()
     return render(request, 'form.html', {'form': form})
 
-# delete view for details
-def delete_entry(request, id):
+def entry_delete(request, id):
     # dictionary for initial data with
     # field names as keys
     context ={}
-
     # fetch the object related to passed id
     obj = get_object_or_404(Entry, id = id)
-
-
     if request.method =="POST":
         # delete object
         obj.delete()
@@ -52,4 +48,4 @@ def delete_entry(request, id):
         # home page
         return HttpResponseRedirect("diaries/diary.html")
 
-    return render(request, "delete_entry.html", context)
+    return render(request, "entry_delete.html", context)

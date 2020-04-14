@@ -20,11 +20,13 @@ def create_baby(request):
     form = BabyForm()
     return render(request, 'form.html', {'form': form})
 
-def baby_detail_view(request, baby_id):
+def baby(request, baby_id):
     baby = Baby.objects.get(id = baby_id)
     template = loader.get_template('babies/baby.html')
+    name = baby.name.capitalize()
     context = {
         'baby': baby,
+        'name': name,
     }
     return HttpResponse(template.render(context, request))
 
