@@ -22,3 +22,6 @@ class Baby(models.Model):
             Diary.objects.create(baby=self, start_date = timezone.now())
         # # handy things:
         # # baby.getattr('diary', None)
+
+    def get_absolute_url(self):
+        return f'/baby/{self.id}'

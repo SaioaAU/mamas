@@ -20,7 +20,7 @@
             "hashes": [
                 "sha256:e3d576d384bd990c3a6ac41f62821950e69fab030b8170ffb295b0374382b571"
             ],
-            "index": "pypi",
+            "baby_list_view": "pypi",
             "version": "==3.14"
         },
         "django-extensions": {
@@ -28,7 +28,7 @@
                 "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6",
                 "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"
             ],
-            "index": "pypi",
+            "baby_list_view": "pypi",
             "version": "==2.2.9"
         },
         "psycopg2": {
@@ -47,7 +47,7 @@
                 "sha256:ef6df7e14698e79c59c7ee7cf94cd62e5b869db369ed4b1b8f7b729ea825712a",
                 "sha256:f898e5cc0a662a9e12bde6f931263a1bbd350cfb18e1d5336a12927851825bb6"
             ],
-            "index": "pypi",
+            "baby_list_view": "pypi",
             "version": "==2.8.4"
         },
         "six": {

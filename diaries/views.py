@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 from django.utils import timezone
 from diaries.forms import EntryForm
-from django.http import HttpResponse
 from django.template import loader
 from diaries.models import Diary, Entry
 
-def create(request):
+def diary_create(request):
     d = Diary.objects.create(text = request.text, start_date = timezone.now(), baby = request.baby.id)
     return HttpResponse("ok")
 
-def diary(request, diary_id):
+def diary_detail(request, diary_id):
     diary = Diary.objects.get(id = diary_id)
     entries_list = diary.entry_set.all()
     template = loader.get_template('diaries/diary.html')
@@ -18,8 +19,8 @@ def diary(request, diary_id):
         'entries_list':entries_list,
     }
     return HttpResponse(template.render(context, request))
-
-def create_entry(request, diary_id):
+#------------------------entry-CRUD--------------------------------------
+def entry_create(request, diary_id):
     if request.method == 'POST':
         form = EntryForm(request.POST)
         print("hello world", form.data)
@@ -33,3 +34,22 @@ def create_entry(request, diary_id):
             print(form.errors)
     form = EntryForm()
     return render(request, 'form.html', {'form': form})
+
+# delete view for details
+def delete_entry(request, id):
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+
+    # fetch the object related to passed id
+    obj = get_object_or_404(Entry, id = id)
+
+
+    if request.method =="POST":
+        # delete object
+        obj.delete()
+        # after deleting redirect to
+        # home page
+        return HttpResponseRedirect("diaries/diary.html")
+
+    return render(request, "delete_entry.html", context)
