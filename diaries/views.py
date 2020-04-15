@@ -1,6 +1,7 @@
 from django.shortcuts import (get_object_or_404,
                               render,
-                              HttpResponseRedirect)
+                              redirect,
+                              HttpResponse)
 from django.utils import timezone
 from diaries.forms import EntryForm
 from django.template import loader
@@ -29,7 +30,8 @@ def entry_create(request, diary_id):
             pee = form.cleaned_data['pee']
             poo = form.cleaned_data['poo']
             created_by = request.user
-            entry = Entry.objects.create(diary_id = diary_id, created_by = created_by, pee = pee, poo = poo )
+            entry = Entry.objects.create(description_text=description_text, diary_id = diary_id, created_by = created_by, pee = pee, poo = poo )
+            return redirect(f'/diaries/{entry.diary.id}')
         else:
             print(form.errors)
     form = EntryForm()

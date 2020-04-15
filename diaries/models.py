@@ -9,6 +9,8 @@ class Diary(models.Model):
     baby = models.OneToOneField('babies.Baby', on_delete=models.CASCADE, related_name='diary')
     def __str__(self):
         return f'Diary for {self.baby.name}, {self.start_date}'
+    def get_absolute_url(self):
+        return f'/diaries/{self.id}'
 
 class Entry(models.Model):
     diary = models.ForeignKey(Diary, on_delete=models.CASCADE)
