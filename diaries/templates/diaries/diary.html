@@ -9,12 +9,13 @@
     {% if entries_list %}
         <ul>
         {% for entry in entries_list %}
-            <li><a href="/diaries/{{ entry.id }}/">{{ entry.description_text }}</a></li>
+            <li>{{ entry.description_text }} </li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No entries are available.</p>
     {% endif %}
     <a href="/diaries/{{ diary.id }}/entry-create"> Create a new entry.</a>
+    <a href="/diaries/{{ diary.id }}/entry-create"> Back.</a>
   </body>
 </html>
