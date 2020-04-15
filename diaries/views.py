@@ -1,7 +1,8 @@
 from django.shortcuts import (get_object_or_404,
                               render,
                               redirect,
-                              HttpResponse)
+                              HttpResponse,
+                              HttpResponseRedirect)
 from django.utils import timezone
 from diaries.forms import EntryForm
 from django.template import loader
@@ -37,17 +38,13 @@ def entry_create(request, diary_id):
     form = EntryForm()
     return render(request, 'form.html', {'form': form})
 
-def entry_delete(request, id):
-    # dictionary for initial data with
-    # field names as keys
+def entry_delete(request, entry_id):
     context ={}
     # fetch the object related to passed id
-    obj = get_object_or_404(Entry, id = id)
+    entry = get_object_or_404(Entry, id = entry_id)
     if request.method =="POST":
-        # delete object
-        obj.delete()
-        # after deleting redirect to
-        # home page
-        return HttpResponseRedirect("diaries/diary.html")
-
-    return render(request, "entry_delete.html", context)
+        url = f'/diaries/{entry.diary.id}'
+        entry.delete()
+        return redirect(url)
+    template = loader.get_template('diaries/delete_entry.html')
+    return HttpResponse(template.render({}, request))
