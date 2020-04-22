@@ -31,7 +31,8 @@ def entry_create(request, diary_id):
             pee = form.cleaned_data['pee']
             poo = form.cleaned_data['poo']
             created_by = request.user
-            entry = Entry.objects.create(description_text=description_text, diary_id = diary_id, created_by = created_by, pee = pee, poo = poo )
+            diary = Diary.objects.get(id = diary_id)
+            entry = Entry.objects.create(description_text=description_text, diary = diary, created_by = created_by, pee = pee, poo = poo )
             return redirect(f'/diaries/{entry.diary.id}')
         else:
             print(form.errors)

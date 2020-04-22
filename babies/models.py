@@ -16,8 +16,6 @@ class Baby(models.Model):
     def save(self, *args, **kwargs):
         # if the baby doesn't have a diary, create one!
         super().save(*args, **kwargs)
-        t = getattr(self, 'diary', None)
-        print('test', t)
         if not getattr(self, 'diary', None):
             Diary.objects.create(baby=self, start_date = timezone.now())
         # # handy things:

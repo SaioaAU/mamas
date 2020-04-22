@@ -11,10 +11,10 @@ class Diary(models.Model):
         return f'Diary for {self.baby.name}, {self.start_date}'
 
 class Entry(models.Model):
-    diary = models.ForeignKey(Diary, on_delete=models.CASCADE)
+    diary = models.ForeignKey(Diary, on_delete=models.CASCADE, related_name='entries')
     description_text = models.CharField(max_length=200)
-    poo = models.IntegerField(default=0)
-    pee = models.IntegerField(default=0)
+    poo = models.BooleanField(default=False)
+    pee = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, related_name='entries', on_delete=models.CASCADE)
     def __str__(self):
         return self.description_text
