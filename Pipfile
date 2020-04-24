@@ -9,6 +9,8 @@ verify_ssl = true
 psycopg2 = ">=2.8.4"
 django-extensions = "*"
 django-datetimepicker = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
 
 [requires]
 python_version = "3.8"
