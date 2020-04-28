@@ -28,11 +28,13 @@ const Login = () => {
         <input value={email} onChange={onChangeEmail} type="email" id="loginEmailInput" />
       </label>
       <br />
+      <br />
       <label htmlFor="loginPasswordInput">
         Password
         {' '}
         <input value={password} onChange={onChangePassword} type="password" id="loginPasswordInput" />
       </label>
+      <br />
       <br />
       <button type="submit" onClick={submit}>Login</button>
     </div>
