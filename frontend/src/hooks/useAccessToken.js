@@ -4,7 +4,7 @@ import jwt from 'jwt-simple';
 
 const API_URL = 'http://localhost:8000/api';
 
-const SECRET_KEY = '#pffjy*-$!n8m-2wgl%z7f*z7vfs_@b*d#^$4(swdk0e+o+n_7';
+const SECRET_KEY = ''; // TODO: Get new secret key from env
 
 
 // Get accessToken and refreshToken from localstorage
