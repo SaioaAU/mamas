@@ -1,11 +1,12 @@
 import React from 'react';
-import LandingPage from './features/LandingPage/LandingPage'
+// import LandingPage from './features/LandingPage/LandingPage'
+import Login from './features/Login/Login';
 
 
 function App() {
   return (
     <div className="App">
-      <LandingPage />
+      <Login />
     </div>
   );
 }
