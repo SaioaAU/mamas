@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'datetimepicker',
     'rest_framework',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -72,6 +73,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -154,3 +156,5 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home'
 
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+
+CORS_ORIGIN_ALLOW_ALL = True

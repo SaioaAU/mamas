@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
+const API_URL = 'http://localhost:8000/api';
+
+const Login = ({ setAccessToken }) => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const onChangeEmail = (event) => {
     const userInput = event.target.value;
-    setEmail(userInput);
+    setUsername(userInput);
   };
 
   const onChangePassword = (event) => {
@@ -14,8 +17,28 @@ const Login = () => {
     setPassword(userInput);
   };
 
-  const submit = () => {
-    console.log('🦊', { email, password });
+  const submit = async () => {
+    const url = `${API_URL}/token/obtain/`;
+    const data = JSON.stringify({ username, password });
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.status !== 200) {
+      setError('Could not log in');
+      return;
+    }
+
+    setError(null);
+    const { access, refresh } = await response.json();
+
+    const { localStorage } = window;
+    localStorage.setItem('mamas-refresh-token', refresh);
+    localStorage.setItem('mamas-access-token', access);
+    setAccessToken(access);
   };
 
   return (
@@ -23,9 +46,9 @@ const Login = () => {
       <h1>Login</h1>
       <br />
       <label htmlFor="loginEmailInput">
-        Email
+        User name
         {' '}
-        <input value={email} onChange={onChangeEmail} type="email" id="loginEmailInput" />
+        <input value={username} onChange={onChangeEmail} type="username" id="loginEmailInput" />
       </label>
       <br />
       <br />
@@ -34,6 +57,17 @@ const Login = () => {
         {' '}
         <input value={password} onChange={onChangePassword} type="password" id="loginPasswordInput" />
       </label>
+      {Boolean(error) && (
+        <>
+          <br />
+          <br />
+          <span>
+            Error:
+            {' '}
+            {error}
+          </span>
+        </>
+      )}
       <br />
       <br />
       <button type="submit" onClick={submit}>Login</button>
