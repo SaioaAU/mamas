@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import jwt from 'jwt-simple';
+import jwtDecode from 'jwt-decode';
 
+const API_URL = process.env.REACT_APP_API_URL;
 
-const API_URL = 'http://localhost:8000/api';
-
-const SECRET_KEY = ''; // TODO: Get new secret key from env
-
+const isTokenExpired = (token) => {
+  const { exp } = jwtDecode(token);
+  return exp < (new Date().getTime()) / 1000 + 10;
+};
 
 // Get accessToken and refreshToken from localstorage
 // if the accessToken is up to date, return it
@@ -15,7 +16,7 @@ const useAccessToken = () => {
   const [loading, setLoading] = useState(true);
   const [accessToken, setAccessToken] = useState(null);
 
-  const fetchAccessToken = async (refreshToken) => {
+  const fetchAccessToken = async () => {
     const { localStorage } = window;
     const refreshTokenFromLocalStorage = localStorage.getItem('mamas-refresh-token');
 
@@ -25,7 +26,7 @@ const useAccessToken = () => {
     }
 
     const url = `${API_URL}/token/refresh/`;
-    const data = JSON.stringify({ refresh: refreshToken });
+    const data = JSON.stringify({ refresh: refreshTokenFromLocalStorage });
 
     const response = await fetch(url, {
       method: 'POST',
@@ -48,12 +49,11 @@ const useAccessToken = () => {
     const accessTokenFromLocalStorage = localStorage.getItem('mamas-access-token');
 
     if (accessTokenFromLocalStorage) {
-      try {
-        jwt.decode(accessTokenFromLocalStorage, SECRET_KEY);
+      if (isTokenExpired(accessTokenFromLocalStorage)) {
+        fetchAccessToken();
+      } else {
         setAccessToken(accessTokenFromLocalStorage);
         setLoading(false);
-      } catch (error) {
-        fetchAccessToken();
       }
     } else {
       fetchAccessToken();
