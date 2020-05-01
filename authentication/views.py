@@ -21,3 +21,9 @@ class UserCreate(APIView):
 class TestView(APIView):
     def get(self, request):
         return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
+
+
+class UserView(APIView):
+    def get(self, request):
+        serialized_user = UserSerializer(request.user).data
+        return Response(data=serialized_user, status=status.HTTP_200_OK)
