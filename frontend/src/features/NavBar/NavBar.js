@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import useAuthentication from '../../hooks/useAuthentication';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const NavBar = () => {
-  const { isLoggedIn, accessToken } = useAuthentication();
+  const {
+    isLoggedIn, setIsLoggedIn, setAccessToken, accessToken,
+  } = useAuthentication();
   const [userName, setUserName] = useState(null);
 
   const fetchUser = useCallback(async () => {
@@ -22,12 +24,22 @@ const NavBar = () => {
 
   useEffect(() => {
     if (isLoggedIn) fetchUser();
+    else setUserName(null);
   }, [fetchUser, isLoggedIn]);
+
+  const { push } = useHistory();
+  const logOut = () => {
+    localStorage.clear();
+    setAccessToken(null);
+    setIsLoggedIn(false);
+    push('/');
+  };
 
   return (
     <div>
       {!isLoggedIn && <Link to="/login">Log in</Link>}
       {Boolean(userName) && <span>{userName}</span>}
+      {Boolean(isLoggedIn) && <button type="button" onClick={logOut}>Log out</button>}
     </div>
   );
 };

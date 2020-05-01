@@ -71,7 +71,7 @@ const useAuthentication = () => {
   }, [accessToken, fetchAccessToken, setAccessToken]);
 
   return {
-    isLoggedIn, isFetchingToken, accessToken, userId,
+    isLoggedIn, isFetchingToken, accessToken, userId, setIsLoggedIn, setAccessToken,
   };
 };
 
