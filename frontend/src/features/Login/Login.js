@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import MamasContext from '../../state/context';
 
 const API_URL = 'http://localhost:8000/api';
 
 const Login = () => {
-  const setAccessToken = () => null;
-  const context = useContext(MamasContext);
-  console.log('🤣', { context });
+  const { setAccessToken } = useContext(MamasContext);
+  // const history = useHistory()
+  // const push = history.push;
+  // Same as:
+  const { push } = useHistory();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -42,8 +46,8 @@ const Login = () => {
 
     const { localStorage } = window;
     localStorage.setItem('mamas-refresh-token', refresh);
-    localStorage.setItem('mamas-access-token', access);
     setAccessToken(access);
+    push('/');
   };
 
   return (
