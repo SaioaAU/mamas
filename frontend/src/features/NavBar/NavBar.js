@@ -1,5 +1,16 @@
 import React from 'react';
 
-const NavBar = () => <div><a href="http://localhost:8000/accounts/login">Login</a></div>;
+import useAuthentication from '../../hooks/useAuthentication';
+
+const NavBar = () => {
+  const { isLoggedIn, accessToken, userId } = useAuthentication();
+  console.log('😱', { isLoggedIn, accessToken, userId });
+
+  return (
+    <div>
+      {!isLoggedIn && <button type="button">Log in</button>}
+    </div>
+  );
+};
 
 export default NavBar;

@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import MamasContext from '../../state/context';
 
 const API_URL = 'http://localhost:8000/api';
 
-const Login = ({ setAccessToken }) => {
+const Login = () => {
+  const setAccessToken = () => null;
+  const context = useContext(MamasContext);
+  console.log('🤣', { context });
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
