@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import useProfile from '../../hooks/useProfile';
 
 import useAuthentication from '../../hooks/useAuthentication';
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 const NavBar = () => {
   const {
@@ -11,21 +10,20 @@ const NavBar = () => {
   } = useAuthentication();
   const [userName, setUserName] = useState(null);
 
-  const fetchUser = useCallback(async () => {
-    const url = `${API_URL}/user/detail/`;
-    const headers = { Authorization: `JWT ${accessToken}` };
-    const response = await fetch(url, { headers });
 
-    if (response.status !== 200) return;
+  const fetchProfile = useProfile(accessToken);
 
-    const { username } = await response.json();
-    setUserName(username);
-  }, [accessToken]);
+  const fetchUserName = useCallback(async () => {
+    const profile = await fetchProfile();
+    setUserName(profile.username);
+  }, [fetchProfile]);
+
 
   useEffect(() => {
-    if (isLoggedIn) fetchUser();
-    else setUserName(null);
-  }, [fetchUser, isLoggedIn]);
+    if (isLoggedIn) {
+      fetchUserName();
+    } else setUserName(null);
+  }, [fetchProfile, fetchUserName, isLoggedIn]);
 
   const { push } = useHistory();
   const logOut = () => {
