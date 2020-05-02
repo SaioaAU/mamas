@@ -27,5 +27,6 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
+    'import/prefer-default-export': 'off',
   },
 };

@@ -1,11 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import LandingPage from './features/LandingPage/LandingPage';
-import Login from './features/Login/Login';
-import Diary from './features/Diary/Diary';
-import Profile from './features/Profile/Profile';
-import Baby from './features/Baby/Baby';
+import {
+  LandingPage, Login, Baby, Diary, Profile,
+} from './features';
 
 import ContextProvider from './state/ContextProvider';
 
