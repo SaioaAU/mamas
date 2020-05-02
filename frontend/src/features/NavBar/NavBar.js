@@ -40,6 +40,7 @@ const NavBar = () => {
       {!isLoggedIn && <Link to="/login">Log in</Link>}
       {Boolean(userName) && <span>{userName}</span>}
       {Boolean(isLoggedIn) && <button type="button" onClick={logOut}>Log out</button>}
+      <Link to="/">Home</Link>
     </div>
   );
 };
