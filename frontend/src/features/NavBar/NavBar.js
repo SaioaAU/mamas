@@ -39,8 +39,15 @@ const NavBar = () => {
     <div>
       {!isLoggedIn && <Link to="/login">Log in</Link>}
       {Boolean(userName) && <span>{userName}</span>}
-      {Boolean(isLoggedIn) && <button type="button" onClick={logOut}>Log out</button>}
-      <Link to="/">Home</Link>
+      {Boolean(isLoggedIn) && (
+      <>
+        <button type="button" onClick={logOut}>Log out</button>
+        <Link to="/Diary">diary</Link>
+        <Link to="/Baby">BABY</Link>
+        <Link to="/Profile">profile</Link>
+        <Link to="/">Home</Link>
+      </>
+      )}
     </div>
   );
 };

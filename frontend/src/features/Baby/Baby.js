@@ -5,7 +5,7 @@ import NavBar from '../NavBar/NavBar';
 const Baby = () => (
   <>
     <NavBar />
-    Landing page
+    Baby
   </>
 );
 
