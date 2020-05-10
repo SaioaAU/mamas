@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import NavBar from './features/NavBar';
 import {
   LandingPage, Login, Baby, Diary, Profile,
 } from './features';
@@ -12,6 +12,7 @@ function App() {
     <div className="App">
       <ContextProvider>
         <BrowserRouter>
+          <NavBar />
           <Switch>
             <Route path="/diary">
               <Diary />

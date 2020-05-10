@@ -4,7 +4,19 @@ from .forms import BabyForm
 from babies.models import Baby
 from django.template import loader
 
-# Create your views here.
+class BabyCreate(APIView):
+
+    def post(self, request, format='json'):
+        serializer = BabySerializer(data=request.data)
+        if serializer.is_valid():
+            baby = serializer.save()
+            if baby:
+                json = serializer.data
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Create your views here for django backkeend.
 def create_baby(request):
     if request.method == 'POST':
         form = BabyForm(request.POST)

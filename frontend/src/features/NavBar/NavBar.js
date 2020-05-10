@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useProfile from '../../hooks/useProfile';
 
@@ -8,22 +8,8 @@ const NavBar = () => {
   const {
     isLoggedIn, setIsLoggedIn, setAccessToken, accessToken,
   } = useAuthentication();
-  const [userName, setUserName] = useState(null);
 
-
-  const fetchProfile = useProfile(accessToken);
-
-  const fetchUserName = useCallback(async () => {
-    const profile = await fetchProfile();
-    setUserName(profile.username);
-  }, [fetchProfile]);
-
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchUserName();
-    } else setUserName(null);
-  }, [fetchProfile, fetchUserName, isLoggedIn]);
+  const profile = useProfile(accessToken, isLoggedIn);
 
   const { push } = useHistory();
   const logOut = () => {
@@ -36,7 +22,7 @@ const NavBar = () => {
   return (
     <div>
       {!isLoggedIn && <Link to="/login">Log in</Link>}
-      {Boolean(userName) && <span>{userName}</span>}
+      {Boolean(profile && profile.username) && <span>{profile.username}</span>}
       {Boolean(isLoggedIn) && (
       <>
         <button type="button" onClick={logOut}>Log out</button>
