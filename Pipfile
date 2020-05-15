@@ -12,6 +12,8 @@ django-datetimepicker = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
+django-braces = "*"
+pyls = "*"
 
 [requires]
 python_version = "3.8"

@@ -4,7 +4,7 @@ import NavBar from './features/NavBar';
 import {
   LandingPage, Login, Baby, Diary, Profile,
 } from './features';
-
+import Create from './features/Baby/views/Create';
 import ContextProvider from './state/ContextProvider';
 
 function App() {
@@ -16,6 +16,9 @@ function App() {
           <Switch>
             <Route path="/diary">
               <Diary />
+            </Route>
+            <Route path="/baby/create">
+              <Create />
             </Route>
             <Route path="/baby">
               <Baby />

@@ -5,7 +5,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 const useProfile = (accessToken, isLoggedIn) => {
   const [profile, setProfile] = useState(null);
   const fetchProfile = useCallback(async () => {
-    const url = `${API_URL}/user/detail/`;
+    const url = `${API_URL}/api/user/detail/`;
     const headers = { Authorization: `JWT ${accessToken}` };
     const response = await fetch(url, { headers });
 

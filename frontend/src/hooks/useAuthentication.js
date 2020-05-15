@@ -40,7 +40,7 @@ const useAuthentication = () => {
     if (!refreshTokenFromLocalStorage) return;
 
     setIsFetchingToken(true);
-    const url = `${API_URL}/token/refresh/`;
+    const url = `${API_URL}/api/token/refresh/`;
     const data = JSON.stringify({ refresh: refreshTokenFromLocalStorage });
 
     const response = await fetch(url, {

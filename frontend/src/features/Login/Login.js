@@ -27,7 +27,7 @@ const Login = () => {
   };
 
   const submit = async () => {
-    const url = `${API_URL}/token/obtain/`;
+    const url = `${API_URL}/api/token/obtain/`;
     const data = JSON.stringify({ username, password });
 
     const response = await fetch(url, {
