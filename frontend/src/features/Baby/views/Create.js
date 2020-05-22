@@ -38,7 +38,7 @@ const Create = () => {
     if (response.status !== 201) {
       setError('Could not create a baby');
     } else {
-      push('/');
+      push('/baby');
     }
   };
 

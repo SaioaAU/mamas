@@ -26,8 +26,9 @@ class TestView(APIView):
 
 class BabyView(APIView):
     def get(self, request):
-        serialized_baby = BabySerializer(request.baby).data
-        return Response(data=serialized_baby, status=status.HTTP_200_OK)
+        babies = request.user.babies.all()
+        serialized_babies = BabySerializer(babies, many=True).data
+        return Response(data=serialized_babies, status=status.HTTP_200_OK)
 
 
 
