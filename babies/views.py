@@ -1,8 +1,3 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .forms import BabyForm
-from babies.models import Baby
-from django.template import loader
 from rest_framework.views import APIView
 from .serializers import BabySerializer
 from rest_framework import status

@@ -1,18 +1,18 @@
 import React from 'react';
 import useAuthentication from '../../hooks/useAuthentication';
-import useProfile from '../../hooks/useProfile';
+import useDiaries from '../../hooks/useDiaries';
 
 const Diary = () => {
   const {
     isLoggedIn, accessToken,
   } = useAuthentication();
 
-  const profile = useProfile(accessToken, isLoggedIn);
+  const diaries = useDiaries(accessToken, isLoggedIn);
 
   return (
     <>
-      Diary
-      {Boolean(profile && profile.diary) && <span>{profile.diary}</span>}
+      Diary hellloooooo
+      {Boolean(diaries && diaries.diary) && <span>{diaries.diary}</span>}
     </>
   );
 };

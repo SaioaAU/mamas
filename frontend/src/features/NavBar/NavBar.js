@@ -26,9 +26,9 @@ const NavBar = () => {
       {Boolean(isLoggedIn) && (
       <>
         <button type="button" onClick={logOut}>Log out</button>
-        <Link to="/Diary">diary</Link>
-        <Link to="/Baby">BABY</Link>
-        <Link to="/Profile">profile</Link>
+        <Link to="/diary">diary</Link>
+        <Link to="/baby">BABY</Link>
+        <Link to="/profile">profile</Link>
         <Link to="/">Home</Link>
       </>
       )}
