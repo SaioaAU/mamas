@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 class DiaryView(APIView):
     def get(self, request):
-        diaries = request.data
+        diaries = request.user.diaries.all()
         serialized_diaries = DiarySerializer(diaries, many=True).data
         return Response(data=serialized_diaries, status=status.HTTP_200_OK)
 #------------------------diary-CRUD for django backend--------------------------------------

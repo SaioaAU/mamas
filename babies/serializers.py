@@ -4,7 +4,7 @@ from rest_framework import serializers
 from babies.models import Baby
 from rest_framework.fields import CurrentUserDefault
 
-class BabySerializer(serializers.ModelSerializer):
+class BabiesSerializer(serializers.ModelSerializer):
     date_of_birth = serializers.DateField(required=True)
     name = serializers.CharField()
 
