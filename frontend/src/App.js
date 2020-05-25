@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavBar from './features/NavBar';
 import {
-  LandingPage, Login, Baby, Diary, Profile,
+  LandingPage, Login, Diary, Profile,
 } from './features';
 import Create from './features/Baby/views/Create';
+import Baby from './features/Baby/views/Baby';
 import ContextProvider from './state/ContextProvider';
 
 function App() {
@@ -17,10 +18,10 @@ function App() {
             <Route path="/diary">
               <Diary />
             </Route>
-            <Route path="/baby/create">
+            <Route path="/babies/create">
               <Create />
             </Route>
-            <Route path="/baby">
+            <Route path="/babies/:id">
               <Baby />
             </Route>
             <Route path="/profile">

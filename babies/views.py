@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from .serializers import BabiesSerializer
+from .serializers import BabySerializer
 from diaries.serializers import DiarySerializer
 from rest_framework import status
 from rest_framework.response import Response
@@ -8,7 +8,7 @@ from babies.models import Baby
 
 class BabyCreate(APIView):
     def post(self, request, format='json'):
-        serializer = BabiesSerializer(data=request.data, context={"user":request.user})
+        serializer = BabySerializer(data=request.data, context={"user":request.user})
         if serializer.is_valid():
             baby = serializer.save()
             if baby:
@@ -24,14 +24,20 @@ class TestView(APIView):
 class BabiesView(APIView):
     def get(self, request):
         babies = request.user.babies.all()
-        serialized_babies = BabiesSerializer(babies, many=True).data
+        serialized_babies = BabySerializer(babies, many=True).data
+        # manually_serialized_babies = f'''[
+        #     {{
+        #         date_of_birth: {baby.date_of_birth},
+        #         name: {baby.name},
+        #     }} for baby in babies
+        # ]'''
         return Response(data=serialized_babies, status=status.HTTP_200_OK)
 
 class BabyView(APIView):
     def get(self, request, baby_id):
         baby = Baby.objects.get(id = baby_id)
         diary = baby.diary
-        serialized_baby = BabiesSerializer(baby).data
+        serialized_baby = BabySerializer(baby).data
         serialized_diary = DiarySerializer(diary).data
         return Response(data= {'baby': serialized_baby, 'diary': serialized_diary}, status=status.HTTP_200_OK)
 

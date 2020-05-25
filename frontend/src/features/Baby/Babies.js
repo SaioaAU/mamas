@@ -5,7 +5,7 @@ import useBabies from '../../hooks/useBabies';
 import useAuthentication from '../../hooks/useAuthentication';
 // import { useHistory } from 'react-router-dom';
 
-const Baby = () => {
+const Babies = () => {
   const {
     isLoggedIn, accessToken,
   } = useAuthentication();
@@ -18,14 +18,14 @@ const Baby = () => {
       <ul>
         {babies.map((baby) => (
           <li>
-            <Link to={`/baby/${baby.id}`}>{capitalize(baby.name)}</Link>
+            <Link to={`/babies/${baby.id}`}>{capitalize(baby.name)}</Link>
           </li>
         ))}
       </ul>
       )}
-      <Link to="/baby/create">create a baby</Link>
+      <Link to="/babies/create">create a baby</Link>
     </>
   );
 };
 
-export default Baby;
+export default Babies;
