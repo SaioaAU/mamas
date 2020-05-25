@@ -6,6 +6,7 @@ import {
 } from './features';
 import Create from './features/Baby/views/Create';
 import Baby from './features/Baby/views/Baby';
+import Babies from './features/Baby/Babies';
 import ContextProvider from './state/ContextProvider';
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route path="/babies/:id">
               <Baby />
+            </Route>
+            <Route path="/babies">
+              <Babies />
             </Route>
             <Route path="/profile">
               <Profile />

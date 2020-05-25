@@ -1,18 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import useBaby from '../../../hooks/useBaby';
 import useAuthentication from '../../../hooks/useAuthentication';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 const Baby = () => {
   const {
     isLoggedIn, accessToken,
   } = useAuthentication();
-  const baby_response = useBaby(accessToken, isLoggedIn);
-  if (!baby_response) return 'loading';
-  const { baby, diary } = baby_response;
-
+  const babyResponse = useBaby(accessToken, isLoggedIn);
+  const params = useParams();
+  const history = useHistory();
+  if (!babyResponse) return 'loading';
+  const { baby, diary } = babyResponse;
+  const deleteBaby = async () => {
+    const url = `${API_URL}/babies/delete/${params.id}`;
+    const headers = { Authorization: `JWT ${accessToken}`, 'Content-Type': 'application/json' };
+    await fetch(url, {
+      method: 'DELETE',
+      headers,
+    });
+    history.push('/babies');
+  };
   return (
 
     <>
@@ -26,7 +38,9 @@ const Baby = () => {
         </li>
       </ul>
       )}
-      <Link to="/babies/create">create a baby</Link>
+      <Link to="/babies/create">create a new baby</Link>
+      <br />
+      <button type="button" onClick={deleteBaby}> delete this baby</button>
     </>
   );
 };

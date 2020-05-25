@@ -35,12 +35,17 @@ class BabiesView(APIView):
 
 class BabyView(APIView):
     def get(self, request, baby_id):
-        baby = Baby.objects.get(id = baby_id)
+        baby = Baby.objects.get(id=baby_id)
         diary = baby.diary
         serialized_baby = BabySerializer(baby).data
         serialized_diary = DiarySerializer(diary).data
-        return Response(data= {'baby': serialized_baby, 'diary': serialized_diary}, status=status.HTTP_200_OK)
+        return Response(data={'baby': serialized_baby, 'diary': serialized_diary}, status=status.HTTP_200_OK)
 
+class DeleteView(APIView):
+    def delete(self, request, baby_id):
+        baby = Baby.objects.get(id=baby_id)
+        baby.delete()
+        return Response(status=status.HTTP_200_OK)
 
 
 # Create your views here for django backkeend.

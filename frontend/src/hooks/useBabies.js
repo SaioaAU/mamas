@@ -18,6 +18,7 @@ const useBabies = (accessToken, isLoggedIn) => {
     setBabies(babiesResult);
   }, [accessToken]);
 
+  console.log(babies, isLoggedIn, API_URL);
   useEffect(() => {
     if (isLoggedIn) {
       fetchBabies();

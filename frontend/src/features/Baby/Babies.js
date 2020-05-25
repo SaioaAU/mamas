@@ -11,6 +11,7 @@ const Babies = () => {
   } = useAuthentication();
 
   const babies = useBabies(accessToken, isLoggedIn);
+  console.log(babies);
   if (!babies) return 'loading';
   return (
     <>
